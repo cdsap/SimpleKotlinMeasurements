@@ -13,7 +13,8 @@ jobs:
   build:
     strategy:
       matrix:
-        units: [2000, 4000, 6000, 8000, 10000, 12000, 14000, 16000, 18000, 2000]
+        iterations: [1,2,3,4,5]
+        units: [2000, 4000, 6000, 8000, 10000, 12000, 14000, 16000, 18000, 20000]
 
     runs-on: ubuntu-latest
     timeout-minutes: 60
@@ -35,11 +36,7 @@ jobs:
           mkdir layer_0
           mv  ${{ matrix.units }}/layer_0/* layer_0
           mv kbuild.gradle.kts layer_0/module_d/build.gradle.kts
-          ./gradlew tasks
-          ls
-          cd layer_0
-          ls
-          cd module_d
-          ls
+          ./gradlew compileKotlin  -Dscan.tag.${{ matrix.units }}  -Dscan.tag.${{ matrix.iterations }}
+          
         env:
           GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GE_KEY }}
