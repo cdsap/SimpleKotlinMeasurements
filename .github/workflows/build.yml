@@ -31,5 +31,15 @@ jobs:
       - name: Build
         run: |
           echo  ${{ matrix.units }}
+          unzip ${{ matrix.units }}.zip
+          mkdir layer_0
+          mv  ${{ matrix.units }}/layer_0/* layer_0
+          mvx kbuild.gradle.kts layer_0/module_d/build.gradle.kts
+          ./gradlew tasks
+          ls
+          cd layer_0
+          ls
+          cd module_d
+          ls
         env:
           GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GE_KEY }}
