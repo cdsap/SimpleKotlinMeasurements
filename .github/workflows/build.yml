@@ -36,7 +36,7 @@ jobs:
           mkdir layer_0
           mv  ${{ matrix.units }}/layer_0/* layer_0
           mv kbuild.gradle.kts layer_0/module_d/build.gradle.kts
-          ./gradlew compileKotlin  -Dscan.tag.${{ matrix.units }}  -Dscan.tag.${{ matrix.iterations }}
+          ./gradlew compileKotlin  -Dscan.tag.KotlinCompilerMeasurements  -Dscan.tag.${{ matrix.units }}  -Dscan.tag.${{ matrix.iterations }}
           
         env:
           GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GE_KEY }}
